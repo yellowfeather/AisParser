@@ -15,20 +15,20 @@ namespace AisParser
 
         public T ReadEnum<T>(int startIndex, int length) where T : Enum
         {
-            var bitValue = RawValue.Substring(startIndex, length);
+            var bitValue = Substring(startIndex, length);
             var value = Convert.ToUInt32(bitValue, 2);
             return (T) Enum.ToObject(typeof(T), value);
         }
 
         public uint ReadUInt(int startIndex, int length)
         {
-            var bitValue = RawValue.Substring(startIndex, length);
+            var bitValue = Substring(startIndex, length);
             return Convert.ToUInt32(bitValue, 2);
         }
 
         public int ReadInt(int startIndex, int length)
         {
-            var bitValue = RawValue.Substring(startIndex, length);
+            var bitValue = Substring(startIndex, length);
             var result = Convert.ToInt32(bitValue.Substring(1), 2);
             if (bitValue.StartsWith("1"))
                 result = (int) (result - Math.Pow(2, bitValue.Length));
@@ -38,13 +38,13 @@ namespace AisParser
 
         public double ReadUnsignedDouble(int startIndex, int length)
         {
-            var bitValue = RawValue.Substring(startIndex, length);
+            var bitValue = Substring(startIndex, length);
             return Convert.ToUInt32(bitValue, 2);
         }
 
         public double ReadDouble(int startIndex, int length)
         {
-            var bitValue = RawValue.Substring(startIndex, length);
+            var bitValue = Substring(startIndex, length);
             var result = (double) Convert.ToInt64(bitValue, 2);
 
             if (bitValue.StartsWith("1"))
@@ -87,9 +87,7 @@ namespace AisParser
 
         public string ReadString(int startIndex, int length)
         {
-            var data = startIndex + length > RawValue.Length 
-                ? RawValue.Substring(startIndex) 
-                : RawValue.Substring(startIndex, length);
+            var data = Substring(startIndex, length);
 
             var value = string.Empty;
             for (var i = 0; i < data.Length / 6; i++)
@@ -119,8 +117,18 @@ namespace AisParser
 
         public bool ReadBoolean(int startIndex, int length)
         {
-            var bitValue = RawValue.Substring(startIndex, length);
+            var bitValue = Substring(startIndex, length);
             return Convert.ToInt32(bitValue) == 1;
+        }
+
+        private string Substring(int startIndex, int length)
+        {
+            if (startIndex > RawValue.Length)
+                return "0";
+
+            return startIndex + length > RawValue.Length
+                ? RawValue.Substring(startIndex)
+                : RawValue.Substring(startIndex, length);
         }
     }
 }

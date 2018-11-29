@@ -63,5 +63,20 @@ namespace AisParserTests.MessagesTests
             message.Assigned.ShouldBeTrue();
             message.NameExtension.ShouldBe("EXTENDED NAME");
         }
+
+        [Fact]
+        public void Should_parse_partial_message()
+        {
+            const string sentence = "!AIVDM,1,1,,B,E>jHCcAQ90VQ62h84V2h@@@@@@@O,0*21";
+
+            var message = Parser.Parse(sentence) as AidToNavigationReportMessage;
+            message.ShouldNotBeNull();
+            message.MessageType.ShouldBe(AisMessageType.AidToNavigationReport);
+            message.Repeat.ShouldBe(0u);
+            message.Mmsi.ShouldBe(992351149u);
+            message.NavigationalAidType.ShouldBe(NavigationalAidType.FixedStuctureOffShore);
+            message.Name.ShouldBe("BRAMBLE PILE");
+            message.PositionAccuracy.ShouldBe(PositionAccuracy.High);
+        }
     }
 }
