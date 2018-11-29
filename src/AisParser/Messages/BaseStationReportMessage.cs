@@ -13,7 +13,7 @@
         public PositionAccuracy PositionAccuracy { get; set; }
         public double Longitude { get; set; }
         public double Latitude { get; set; }
-        public EpfdFixType EpfdFixType { get; set; }
+        public PositionFixType PositionFixType { get; set; }
         public uint Spare { get; set; }
         public Raim Raim { get; set; }
         public uint RadioStatus { get; set; }
@@ -38,7 +38,7 @@
                 PositionAccuracy = payload.ReadEnum<PositionAccuracy>(78, 1),
                 Longitude = payload.ReadLongitude(79, 28),
                 Latitude = payload.ReadLatitude(107, 27),
-                EpfdFixType = payload.ReadEnum<EpfdFixType>(134, 4),
+                PositionFixType = payload.ReadEnum<PositionFixType>(134, 4),
                 Spare = payload.ReadUInt(138, 10),
                 Raim = payload.ReadEnum<Raim>(148, 1),
                 RadioStatus = payload.ReadUInt(149, 19)

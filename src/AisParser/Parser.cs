@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Text;
 
 namespace AisParser
@@ -7,6 +8,7 @@ namespace AisParser
     {
         private readonly PayloadDecoder _payloadDecoder;
         private readonly AisMessageFactory _messageFactory;
+        private IDictionary<int, string> _fragments = new Dictionary<int, string>();
 
         public Parser(PayloadDecoder payloadDecoder, AisMessageFactory messageFactory)
         {
@@ -40,10 +42,29 @@ namespace AisParser
                 throw new AisParserException($"Unrecognised message: packet header {packetHeader}", sentence);
 
             var numFragments = Convert.ToInt32(sentenceParts[1]);
-            var fragment = Convert.ToInt32(sentenceParts[2]);
-            var messageId = sentenceParts[3];
             var radioChannelCode = sentenceParts[4];
             var encodedPayload = sentenceParts[5];
+
+            if (numFragments > 1)
+            {
+                var fragmentNumber = Convert.ToInt32(sentenceParts[2]);
+                var messageId = Convert.ToInt32(sentenceParts[3]);
+
+                if (fragmentNumber == 1)
+                {
+                    _fragments[messageId] = encodedPayload;
+                    return null;
+                }
+
+                if (fragmentNumber < numFragments)
+                {
+                    _fragments[messageId] += encodedPayload;
+                    return null;
+                }
+
+                var fragment = _fragments[messageId];
+                encodedPayload = fragment + encodedPayload;
+            }
 
             var numFillBits = Convert.ToInt32(sentenceParts[6]);
             var payload = _payloadDecoder.Decode(encodedPayload, numFillBits);

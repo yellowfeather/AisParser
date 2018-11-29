@@ -16,7 +16,8 @@ namespace AisParser
                     return PositionReportClassAResponseToInterrogationMessage.Create(payload);
                 case AisMessageType.BaseStationReport:
                     return BaseStationReportMessage.Create(payload);
-                //case AisMessageType.StaticAndVoyageRelatedData:
+                case AisMessageType.StaticAndVoyageRelatedData:
+                    return StaticAndVoyageRelatedDataMessage.Create(payload);
                 //case AisMessageType.BinaryAddressedMessage:
                 //case AisMessageType.BinaryAcknowledge:
                 //case AisMessageType.BinaryBroadcastMessage:

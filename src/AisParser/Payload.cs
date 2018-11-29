@@ -4,20 +4,20 @@ namespace AisParser
 {
     public class Payload
     {
-        public string RawValue { get; set; }
-        public AisMessageType MessageType { get; set; }
-
         public Payload(string rawValue)
         {
             RawValue = rawValue;
             MessageType = ReadEnum<AisMessageType>(0, 6);
         }
 
+        public string RawValue { get; set; }
+        public AisMessageType MessageType { get; set; }
+
         public T ReadEnum<T>(int startIndex, int length) where T : Enum
         {
             var bitValue = RawValue.Substring(startIndex, length);
             var value = Convert.ToUInt32(bitValue, 2);
-            return (T)Enum.ToObject(typeof(T), value);
+            return (T) Enum.ToObject(typeof(T), value);
         }
 
         public uint ReadUInt(int startIndex, int length)
@@ -45,7 +45,7 @@ namespace AisParser
         public double ReadDouble(int startIndex, int length)
         {
             var bitValue = RawValue.Substring(startIndex, length);
-            var result = (double)Convert.ToInt64(bitValue, 2);
+            var result = (double) Convert.ToInt64(bitValue, 2);
 
             if (bitValue.StartsWith("1"))
                 result = result - Math.Pow(2, bitValue.Length);
@@ -83,6 +83,36 @@ namespace AisParser
         public double ReadCourseOverGround(int startIndex, int length)
         {
             return ReadUnsignedDouble(startIndex, length) / 10;
+        }
+
+        public string ReadString(int startIndex, int length)
+        {
+            var data = RawValue.Substring(startIndex, length);
+
+            var value = string.Empty;
+            for (var i = 0; i < data.Length / 6; i++)
+            {
+                var b = Convert.ToByte(data.Substring(i * 6, 6), 2);
+
+                if (b < 32) //convert to 6-bit ASCII - control chars to uppercase latins
+                    b = (byte)(b + 64);
+
+                if (b != 64)
+                    value = value + (char)b;
+            }
+
+            return value.Trim();
+        }
+
+        public double ReadDraught(int startIndex, int length)
+        {
+            return ReadUnsignedDouble(startIndex, length) / 10;
+        }
+
+        public bool ReadDataTerminalReady(int startIndex, int length)
+        {
+            var value = ReadUInt(startIndex, length);
+            return value == 0;
         }
     }
 }

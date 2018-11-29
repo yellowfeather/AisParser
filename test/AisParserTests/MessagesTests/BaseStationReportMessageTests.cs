@@ -26,7 +26,7 @@ namespace AisParserTests.MessagesTests
             message.PositionAccuracy.ShouldBe(PositionAccuracy.Low);
             message.Longitude.ShouldBe(-1.110023d, 0.000001d);
             message.Latitude.ShouldBe(50.799618d, 0.000001d);
-            message.EpfdFixType.ShouldBe(EpfdFixType.Undefined2);
+            message.PositionFixType.ShouldBe(PositionFixType.Undefined2);
             message.Spare.ShouldBe(0u);
             message.Raim.ShouldBe(Raim.InUse);
             message.RadioStatus.ShouldBe(114788u);
@@ -51,7 +51,7 @@ namespace AisParserTests.MessagesTests
             message.PositionAccuracy.ShouldBe(PositionAccuracy.High);
             message.Longitude.ShouldBe(-70.83633333333334d, 0.000001d);
             message.Latitude.ShouldBe(42.24316666666667d, 0.000001d);
-            message.EpfdFixType.ShouldBe(EpfdFixType.Surveyed);
+            message.PositionFixType.ShouldBe(PositionFixType.Surveyed);
             message.Spare.ShouldBe(0u);
             message.Raim.ShouldBe(Raim.NotInUse);
             message.RadioStatus.ShouldBe(33236u);
@@ -76,7 +76,7 @@ namespace AisParserTests.MessagesTests
             message.PositionAccuracy.ShouldBe(PositionAccuracy.High);
             message.Longitude.ShouldBe(-82.6661d, 0.000001d);
             message.Latitude.ShouldBe(42.069433333333336d, 0.000001d);
-            message.EpfdFixType.ShouldBe(EpfdFixType.Surveyed);
+            message.PositionFixType.ShouldBe(PositionFixType.Surveyed);
             message.Spare.ShouldBe(0u);
             message.Raim.ShouldBe(Raim.NotInUse);
             message.RadioStatus.ShouldBe(2250u);
@@ -101,7 +101,7 @@ namespace AisParserTests.MessagesTests
             message.PositionAccuracy.ShouldBe(PositionAccuracy.Low);
             message.Longitude.ShouldBe(-117.24025166666667d, 0.000001d);
             message.Latitude.ShouldBe(32.670415d, 0.000001d);
-            message.EpfdFixType.ShouldBe(EpfdFixType.Gps);
+            message.PositionFixType.ShouldBe(PositionFixType.Gps);
             message.Spare.ShouldBe(0u);
             message.Raim.ShouldBe(Raim.NotInUse);
             message.RadioStatus.ShouldBe(28396u);
@@ -126,7 +126,7 @@ namespace AisParserTests.MessagesTests
             message.PositionAccuracy.ShouldBe(PositionAccuracy.High);
             message.Longitude.ShouldBe(-122.84d, 0.000001d);
             message.Latitude.ShouldBe(48.68009833333333d, 0.000001d);
-            message.EpfdFixType.ShouldBe(EpfdFixType.Surveyed);
+            message.PositionFixType.ShouldBe(PositionFixType.Surveyed);
             message.Spare.ShouldBe(0u);
             message.Raim.ShouldBe(Raim.NotInUse);
             message.RadioStatus.ShouldBe(166088u);

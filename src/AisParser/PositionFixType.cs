@@ -1,6 +1,6 @@
 ﻿namespace AisParser
 {
-    public enum EpfdFixType
+    public enum PositionFixType
     {
         Undefined1,
         Gps,
