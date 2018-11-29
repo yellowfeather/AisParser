@@ -39,7 +39,7 @@ namespace AisParser
         public double ReadUnsignedDouble(int startIndex, int length)
         {
             var bitValue = RawValue.Substring(startIndex, length);
-            return (double)Convert.ToUInt32(bitValue, 2);
+            return Convert.ToUInt32(bitValue, 2);
         }
 
         public double ReadDouble(int startIndex, int length)
@@ -63,6 +63,26 @@ namespace AisParser
         {
             var trueHeading = ReadUInt(startIndex, length);
             return trueHeading == 511 ? null : new uint?(trueHeading);
+        }
+
+        public double ReadLongitude(int startIndex, int length)
+        {
+            return ReadDouble(startIndex, length) / 600000;
+        }
+
+        public double ReadLatitude(int startIndex, int length)
+        {
+            return ReadDouble(startIndex, length) / 600000;
+        }
+
+        public double ReadSpeedOverGround(int startIndex, int length)
+        {
+            return ReadUnsignedDouble(startIndex, length) / 10;
+        }
+
+        public double ReadCourseOverGround(int startIndex, int length)
+        {
+            return ReadUnsignedDouble(startIndex, length) / 10;
         }
     }
 }
