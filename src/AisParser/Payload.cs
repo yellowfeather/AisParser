@@ -114,5 +114,11 @@ namespace AisParser
             var value = ReadUInt(startIndex, length);
             return value == 0;
         }
+
+        public bool ReadBoolean(int startIndex, int length)
+        {
+            var bitValue = RawValue.Substring(startIndex, length);
+            return Convert.ToInt32(bitValue) == 1;
+        }
     }
 }

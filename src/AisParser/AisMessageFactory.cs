@@ -30,7 +30,8 @@ namespace AisParser
                 //case AisMessageType.Interrogation:
                 //case AisMessageType.AssignmentModeCommand:
                 //case AisMessageType.DgnssBinaryBroadcastMessage:
-                //case AisMessageType.StandardClassBCsPositionReport:
+                case AisMessageType.StandardClassBCsPositionReport:
+                    return StandardClassBCsPositionReportMessage.Create(payload);
                 //case AisMessageType.ExtendedClassBEquipmentPositionReport:
                 //case AisMessageType.DataLinkManagement:
                 //case AisMessageType.AidToNavigationReport:
