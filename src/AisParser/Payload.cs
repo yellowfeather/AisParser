@@ -87,7 +87,9 @@ namespace AisParser
 
         public string ReadString(int startIndex, int length)
         {
-            var data = RawValue.Substring(startIndex, length);
+            var data = startIndex + length > RawValue.Length 
+                ? RawValue.Substring(startIndex) 
+                : RawValue.Substring(startIndex, length);
 
             var value = string.Empty;
             for (var i = 0; i < data.Length / 6; i++)
