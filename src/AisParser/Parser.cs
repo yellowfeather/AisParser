@@ -45,6 +45,9 @@ namespace AisParser
             var radioChannelCode = sentenceParts[4];
             var encodedPayload = sentenceParts[5];
 
+            if (string.IsNullOrWhiteSpace(encodedPayload))
+                return null;
+
             if (numFragments > 1)
             {
                 var fragmentNumber = Convert.ToInt32(sentenceParts[2]);
