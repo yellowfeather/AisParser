@@ -37,7 +37,8 @@ namespace AisParser
                 //case AisMessageType.AidToNavigationReport:
                 //case AisMessageType.ChannelManagement:
                 //case AisMessageType.GroupAssignmentCommand:
-                //case AisMessageType.StaticDataReport:
+                case AisMessageType.StaticDataReport:
+                    return StaticDataReportMessage.Create(payload);
                 //case AisMessageType.SingleSlotBinaryMessage:
                 //case AisMessageType.MultipleSlotBinaryMessageWithCommunicationsState:
                 //case AisMessageType.PositionReportForLongRangeApplications:
