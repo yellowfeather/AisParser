@@ -74,6 +74,37 @@ namespace AisParserTests.MessagesTests
         }
 
         [Fact]
+        public void Should_parse_incomplete_message()
+        {
+            const string sentence = "!AIVDM,1,1,,A,5815AE82DP=uKLPkT004j0l5<Q84800000000017AcS?T0,4*63";
+
+            var message = Parser.Parse(sentence) as StaticAndVoyageRelatedDataMessage;
+
+            message.ShouldNotBeNull();
+            message.MessageType.ShouldBe(AisMessageType.StaticAndVoyageRelatedData);
+            message.Repeat.ShouldBe(0u);
+            message.Mmsi.ShouldBe(538005844u);
+            message.AisVersion.ShouldBe(2u);
+            message.ImoNumber.ShouldBe(9732319u);
+            message.CallSign.ShouldBe("V7HL9");
+            message.ShipName.ShouldBe("AL MASHRAB");
+            message.ShipType.ShouldBe(ShipType.CargoHazardousCategoryA);
+            message.DimensionToBow.ShouldBe(141u);
+            message.DimensionToStern.ShouldBe(227u);
+            message.DimensionToPort.ShouldBe(15u);
+            message.DimensionToStarboard.ShouldBe(36u);
+            message.PositionFixType.ShouldBe(PositionFixType.Undefined1);
+            message.EtaMonth.ShouldBe(0u);
+            message.EtaDay.ShouldBe(0u);
+            message.EtaHour.ShouldBe(0u);
+            message.EtaMinute.ShouldBe(0u);
+            message.Draught.ShouldBe(0d);
+            message.Destination.ShouldBeEmpty();
+            message.DataTerminalReady.ShouldBeTrue();
+            message.Spare.ShouldBe(0u);
+        }
+
+        [Fact]
         public void Should_parse_message_with_nil_eta_1()
         {
             const string sentence1 = "!AIVDM,2,1,6,A,539`vQ400000@SGKGP0P4q<D5@000000000000150@@23t0Ht0B0C@UDQh00,0*6B";
