@@ -2,7 +2,7 @@ namespace AisParser
 {
     public abstract class AisMessage
     {
-        public AisMessageType MessageType { get; set; }
+        public AisMessageType MessageType { get; }
 
         protected AisMessage(AisMessageType messageType)
         {
