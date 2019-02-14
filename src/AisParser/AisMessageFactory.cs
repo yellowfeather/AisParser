@@ -33,7 +33,8 @@ namespace AisParser
                 case AisMessageType.StandardClassBCsPositionReport:
                     return StandardClassBCsPositionReportMessage.Create(payload);
                 //case AisMessageType.ExtendedClassBEquipmentPositionReport:
-                //case AisMessageType.DataLinkManagement:
+                case AisMessageType.DataLinkManagement:
+                    return DataLinkManagementMessage.Create(payload);
                 case AisMessageType.AidToNavigationReport:
                     return AidToNavigationReportMessage.Create(payload);
                 //case AisMessageType.ChannelManagement:
