@@ -8,7 +8,7 @@ namespace AisParser
     {
         private readonly PayloadDecoder _payloadDecoder;
         private readonly AisMessageFactory _messageFactory;
-        private IDictionary<int, string> _fragments = new Dictionary<int, string>();
+        private readonly IDictionary<int, string> _fragments = new Dictionary<int, string>();
 
         public Parser(PayloadDecoder payloadDecoder, AisMessageFactory messageFactory)
         {
@@ -41,37 +41,43 @@ namespace AisParser
             if (!ValidPacketHeader(packetHeader))
                 throw new AisParserException($"Unrecognised message: packet header {packetHeader}", sentence);
 
-            var numFragments = Convert.ToInt32(sentenceParts[1]);
             var radioChannelCode = sentenceParts[4];
             var encodedPayload = sentenceParts[5];
 
             if (string.IsNullOrWhiteSpace(encodedPayload))
                 return null;
 
-            if (numFragments > 1)
+            var payload = DecodePayload(encodedPayload, sentenceParts);
+            return payload == null ? null : _messageFactory.Create(payload);
+        }
+
+        private Payload DecodePayload(string encodedPayload, string[] sentenceParts)
+        {
+            var numFragments = Convert.ToInt32(sentenceParts[1]);
+            var numFillBits = Convert.ToInt32(sentenceParts[6]);
+
+            if (numFragments == 1) 
+                return _payloadDecoder.Decode(encodedPayload, numFillBits);
+
+            var fragmentNumber = Convert.ToInt32(sentenceParts[2]);
+            var messageId = Convert.ToInt32(sentenceParts[3]);
+
+            if (fragmentNumber == 1)
             {
-                var fragmentNumber = Convert.ToInt32(sentenceParts[2]);
-                var messageId = Convert.ToInt32(sentenceParts[3]);
-
-                if (fragmentNumber == 1)
-                {
-                    _fragments[messageId] = encodedPayload;
-                    return null;
-                }
-
-                if (fragmentNumber < numFragments)
-                {
-                    _fragments[messageId] += encodedPayload;
-                    return null;
-                }
-
-                var fragment = _fragments[messageId];
-                encodedPayload = fragment + encodedPayload;
+                _fragments[messageId] = encodedPayload;
+                return null;
             }
 
-            var numFillBits = Convert.ToInt32(sentenceParts[6]);
-            var payload = _payloadDecoder.Decode(encodedPayload, numFillBits);
-            return _messageFactory.Create(payload);
+            if (fragmentNumber < numFragments)
+            {
+                _fragments[messageId] += encodedPayload;
+                return null;
+            }
+
+            var fragment = _fragments[messageId];
+            encodedPayload = fragment + encodedPayload;
+
+            return _payloadDecoder.Decode(encodedPayload, numFillBits);
         }
 
         public int ExtractChecksum(string sentence, int checksumIndex)

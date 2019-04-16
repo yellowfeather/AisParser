@@ -4,14 +4,20 @@ namespace AisParser
 {
     public class Payload
     {
+        public Payload()
+        {
+            MessageType = AisMessageType.PositionReportClassA;
+        }
+
         public Payload(string rawValue)
         {
             RawValue = rawValue;
             MessageType = ReadEnum<AisMessageType>(0, 6);
         }
 
-        public string RawValue { get; set; }
-        public AisMessageType MessageType { get; set; }
+        public string RawValue { get; }
+
+        public AisMessageType MessageType { get; }
 
         public T ReadEnum<T>(int startIndex, int length) where T : Enum
         {
