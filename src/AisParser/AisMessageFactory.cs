@@ -18,8 +18,8 @@ namespace AisParser
                     return BaseStationReportMessage.Create(payload);
                 case AisMessageType.StaticAndVoyageRelatedData:
                     return StaticAndVoyageRelatedDataMessage.Create(payload);
-                //case AisMessageType.BinaryAddressedMessage:
-                //case AisMessageType.BinaryAcknowledge:
+                //TODO: case AisMessageType.BinaryAddressedMessage:
+                //TODO: case AisMessageType.BinaryAcknowledge:
                 //case AisMessageType.BinaryBroadcastMessage:
                 //case AisMessageType.StandardSarAircraftPositionReport:
                 //case AisMessageType.UtcAndDateInquiry:
@@ -27,7 +27,7 @@ namespace AisParser
                 //case AisMessageType.AddressedSafetyRelatedMessage:
                 //case AisMessageType.SafetyRelatedAcknowledgement:
                 //case AisMessageType.SafetyRelatedBroadcastMessage:
-                //case AisMessageType.Interrogation:
+                //TODO: case AisMessageType.Interrogation:
                 //case AisMessageType.AssignmentModeCommand:
                 //case AisMessageType.DgnssBinaryBroadcastMessage:
                 case AisMessageType.StandardClassBCsPositionReport:
@@ -43,7 +43,8 @@ namespace AisParser
                     return StaticDataReportMessage.Create(payload);
                 //case AisMessageType.SingleSlotBinaryMessage:
                 //case AisMessageType.MultipleSlotBinaryMessageWithCommunicationsState:
-                //case AisMessageType.PositionReportForLongRangeApplications:
+                //TODO: case AisMessageType.PositionReportForLongRangeApplications:
+                //TODO: 32
                 default:
                     throw new AisMessageException($"Unrecognised message type: {payload.MessageType}");
             }
