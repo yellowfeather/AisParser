@@ -20,6 +20,9 @@ steps:
 - script: dotnet build --configuration $(buildConfiguration)
   displayName: 'dotnet build $(buildConfiguration)'
 
+- script: dotnet test test/SmartShapeApi.UnitTests --configuration $(buildConfiguration) --logger trx
+  displayName: Run tests
+
 - task: PublishTestResults@2
   condition: succeededOrFailed()
   inputs:
