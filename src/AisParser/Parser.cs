@@ -41,7 +41,7 @@ namespace AisParser
             if (!ValidPacketHeader(packetHeader))
                 throw new AisParserException($"Unrecognised message: packet header {packetHeader}", sentence);
 
-            var radioChannelCode = sentenceParts[4];
+            // var radioChannelCode = sentenceParts[4];
             var encodedPayload = sentenceParts[5];
 
             if (string.IsNullOrWhiteSpace(encodedPayload))
