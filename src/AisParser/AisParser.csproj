@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <Description></Description>
+    <Description>C# decoder for Automatic Identification System (AIS) for tracking ships and decoding maritime information</Description>
     <Copyright>Copyright Chris Richards</Copyright>
     <VersionPrefix>1.0.0</VersionPrefix>
     <Authors>Chris Richards</Authors>
