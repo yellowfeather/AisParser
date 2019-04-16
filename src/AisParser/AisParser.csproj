@@ -11,7 +11,7 @@
     <PackageId>AisParser</PackageId>
     <PackageTags></PackageTags>
     <PackageProjectUrl>https://github.com/yellowfeather/AisParser</PackageProjectUrl>
-    <PackageLicense>https://github.com/yellowfeather/AisParser/blob/master/LICENSE</PackageLicense>
+    <PackageLicenseExpression>MIT</PackageLicenseExpression>
     <RepositoryType>git</RepositoryType>
     <RepositoryUrl>git://github.com/yellowfeather/AisParser</RepositoryUrl>
     <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
