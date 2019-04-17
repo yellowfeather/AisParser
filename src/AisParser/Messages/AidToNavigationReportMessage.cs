@@ -2,8 +2,6 @@
 {
     public class AidToNavigationReportMessage : AisMessage
     {
-        public uint Repeat { get; set; }
-        public uint Mmsi { get; set; }
         public NavigationalAidType NavigationalAidType { get; set; }
         public string Name { get; set; }
         public PositionAccuracy PositionAccuracy { get; set; }
@@ -28,31 +26,27 @@
         {
         }
 
-        public static AidToNavigationReportMessage Create(Payload payload)
+        public AidToNavigationReportMessage(Payload payload)
+            : base(AisMessageType.AidToNavigationReport, payload)
         {
-            return new AidToNavigationReportMessage
-            {
-                Repeat = payload.ReadUInt(6, 2),
-                Mmsi = payload.ReadUInt(8, 30),
-                NavigationalAidType = payload.ReadEnum<NavigationalAidType>(38, 5),
-                Name = payload.ReadString(43, 120),
-                PositionAccuracy = payload.ReadEnum<PositionAccuracy>(163, 1),
-                Longitude = payload.ReadLongitude(164, 28),
-                Latitude = payload.ReadLatitude(192, 27),
-                DimensionToBow = payload.ReadUInt(219, 9),
-                DimensionToStern = payload.ReadUInt(228, 9),
-                DimensionToPort = payload.ReadUInt(237, 6),
-                DimensionToStarboard = payload.ReadUInt(243, 6),
-                PositionFixType = payload.ReadEnum<PositionFixType>(249, 4),
-                Timestamp = payload.ReadUInt(253, 6),
-                OffPosition = payload.ReadBoolean(259, 1),
-                RegionalReserved = payload.ReadUInt(260, 8),
-                Raim = payload.ReadEnum<Raim>(268, 1),
-                VirtualAid = payload.ReadBoolean(269, 1),
-                Assigned = payload.ReadBoolean(270, 1),
-                Spare = payload.ReadUInt(271, 1),
-                NameExtension = payload.ReadString(272, 88)
-            };
+            NavigationalAidType = payload.ReadEnum<NavigationalAidType>(38, 5);
+            Name = payload.ReadString(43, 120);
+            PositionAccuracy = payload.ReadEnum<PositionAccuracy>(163, 1);
+            Longitude = payload.ReadLongitude(164, 28);
+            Latitude = payload.ReadLatitude(192, 27);
+            DimensionToBow = payload.ReadUInt(219, 9);
+            DimensionToStern = payload.ReadUInt(228, 9);
+            DimensionToPort = payload.ReadUInt(237, 6);
+            DimensionToStarboard = payload.ReadUInt(243, 6);
+            PositionFixType = payload.ReadEnum<PositionFixType>(249, 4);
+            Timestamp = payload.ReadUInt(253, 6);
+            OffPosition = payload.ReadBoolean(259, 1);
+            RegionalReserved = payload.ReadUInt(260, 8);
+            Raim = payload.ReadEnum<Raim>(268, 1);
+            VirtualAid = payload.ReadBoolean(269, 1);
+            Assigned = payload.ReadBoolean(270, 1);
+            Spare = payload.ReadUInt(271, 1);
+            NameExtension = payload.ReadString(272, 88);
         }
     }
 }

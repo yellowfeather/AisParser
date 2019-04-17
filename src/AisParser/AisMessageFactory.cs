@@ -9,15 +9,15 @@ namespace AisParser
             switch (payload.MessageType)
             {
                 case AisMessageType.PositionReportClassA:
-                    return PositionReportClassAMessage.Create(payload);
+                    return new PositionReportClassAMessage(payload);
                 case AisMessageType.PositionReportClassAAssignedSchedule:
-                    return PositionReportClassAAssignedScheduleMessage.Create(payload);
+                    return new PositionReportClassAAssignedScheduleMessage(payload);
                 case AisMessageType.PositionReportClassAResponseToInterrogation:
-                    return PositionReportClassAResponseToInterrogationMessage.Create(payload);
+                    return new PositionReportClassAResponseToInterrogationMessage(payload);
                 case AisMessageType.BaseStationReport:
-                    return BaseStationReportMessage.Create(payload);
+                    return new BaseStationReportMessage(payload);
                 case AisMessageType.StaticAndVoyageRelatedData:
-                    return StaticAndVoyageRelatedDataMessage.Create(payload);
+                    return new StaticAndVoyageRelatedDataMessage(payload);
                 //TODO: case AisMessageType.BinaryAddressedMessage:
                 //TODO: case AisMessageType.BinaryAcknowledge:
                 //case AisMessageType.BinaryBroadcastMessage:
@@ -31,16 +31,23 @@ namespace AisParser
                 //case AisMessageType.AssignmentModeCommand:
                 //case AisMessageType.DgnssBinaryBroadcastMessage:
                 case AisMessageType.StandardClassBCsPositionReport:
-                    return StandardClassBCsPositionReportMessage.Create(payload);
+                    return new StandardClassBCsPositionReportMessage(payload);
                 //case AisMessageType.ExtendedClassBEquipmentPositionReport:
                 case AisMessageType.DataLinkManagement:
-                    return DataLinkManagementMessage.Create(payload);
+                    return new DataLinkManagementMessage(payload);
                 case AisMessageType.AidToNavigationReport:
-                    return AidToNavigationReportMessage.Create(payload);
+                    return new AidToNavigationReportMessage(payload);
                 //case AisMessageType.ChannelManagement:
                 //case AisMessageType.GroupAssignmentCommand:
                 case AisMessageType.StaticDataReport:
-                    return StaticDataReportMessage.Create(payload);
+                {
+                    var info = new StaticDataReportMessageInfo(payload);
+                    if (info.PartNumber == 0)
+                        return new StaticDataReportPartAMessage(info, payload);
+                    else 
+                        return new StaticDataReportPartBMessage(info, payload);
+                }
+
                 //case AisMessageType.SingleSlotBinaryMessage:
                 //case AisMessageType.MultipleSlotBinaryMessageWithCommunicationsState:
                 //TODO: case AisMessageType.PositionReportForLongRangeApplications:

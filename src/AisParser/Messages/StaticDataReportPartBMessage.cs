@@ -13,5 +13,24 @@
         public uint DimensionToStarboard { get; set; }
         public uint MothershipMmsi { get; set; }
         public uint Spare { get; set; }
+
+        public StaticDataReportPartBMessage(StaticDataReportMessageInfo info, Payload payload)
+            : base(info)
+        {
+            ShipType = payload.ReadEnum<ShipType>(40, 8);
+            VendorId = payload.ReadString(48, 18);
+            UnitModelCode = payload.ReadUInt(66, 4);
+            SerialNumber = payload.ReadUInt(70, 20);
+            CallSign = payload.ReadString(90, 42);
+
+            // TODO: handle MMSI auxiliary craft
+            //MothershipMmsi = payload.ReadUInt(132, 30);
+
+            DimensionToBow = payload.ReadUInt(132, 9);
+            DimensionToStern = payload.ReadUInt(141, 9);
+            DimensionToPort = payload.ReadUInt(150, 6);
+            DimensionToStarboard = payload.ReadUInt(156, 6);
+            Spare = payload.ReadUInt(162, 6);
+        }
     }
 }

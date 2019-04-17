@@ -7,9 +7,10 @@ namespace AisParser.Messages
         {
         }
 
-        public static PositionReportClassAAssignedScheduleMessage Create(Payload payload)
+        public PositionReportClassAAssignedScheduleMessage(Payload payload)
+
+            : base(AisMessageType.PositionReportClassAAssignedSchedule, payload)
         {
-            return Create<PositionReportClassAAssignedScheduleMessage>(payload);
         }
     }
 }

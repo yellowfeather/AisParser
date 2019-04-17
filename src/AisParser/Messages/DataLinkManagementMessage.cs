@@ -2,8 +2,6 @@
 {
     public class DataLinkManagementMessage : AisMessage
     {
-        public uint Repeat { get; set; }
-        public uint Mmsi { get; set; }
         public uint Spare { get; set; }
         public uint Offset1 { get; set; }
         public uint ReservedSlots1 { get; set; }
@@ -27,30 +25,26 @@
         {
         }
 
-        public static DataLinkManagementMessage Create(Payload payload)
+        public DataLinkManagementMessage(Payload payload)
+            : base(AisMessageType.DataLinkManagement, payload)
         {
-            return new DataLinkManagementMessage
-            {
-                Repeat = payload.ReadUInt(6, 2),
-                Mmsi = payload.ReadUInt(8, 30),
-                Spare = payload.ReadUInt(38, 2),
-                Offset1 = payload.ReadUInt(40, 12),
-                ReservedSlots1 = payload.ReadUInt(52,4),
-                Timeout1 = payload.ReadUInt(56, 3),
-                Increment1 = payload.ReadUInt(59, 11),
-                Offset2 = payload.ReadUInt(70, 12),
-                ReservedSlots2 = payload.ReadUInt(82, 4),
-                Timeout2 = payload.ReadUInt(86, 3),
-                Increment2 = payload.ReadUInt(89, 11),
-                Offset3 = payload.ReadUInt(100, 12),
-                ReservedSlots3 = payload.ReadUInt(112, 4),
-                Timeout3 = payload.ReadUInt(116, 3),
-                Increment3 = payload.ReadUInt(119, 11),
-                Offset4 = payload.ReadUInt(130, 12),
-                ReservedSlots4 = payload.ReadUInt(142, 4),
-                Timeout4 = payload.ReadUInt(146, 3),
-                Increment4 = payload.ReadUInt(149, 11)
-            };
+            Spare = payload.ReadUInt(38, 2);
+            Offset1 = payload.ReadUInt(40, 12);
+            ReservedSlots1 = payload.ReadUInt(52, 4);
+            Timeout1 = payload.ReadUInt(56, 3);
+            Increment1 = payload.ReadUInt(59, 11);
+            Offset2 = payload.ReadUInt(70, 12);
+            ReservedSlots2 = payload.ReadUInt(82, 4);
+            Timeout2 = payload.ReadUInt(86, 3);
+            Increment2 = payload.ReadUInt(89, 11);
+            Offset3 = payload.ReadUInt(100, 12);
+            ReservedSlots3 = payload.ReadUInt(112, 4);
+            Timeout3 = payload.ReadUInt(116, 3);
+            Increment3 = payload.ReadUInt(119, 11);
+            Offset4 = payload.ReadUInt(130, 12);
+            ReservedSlots4 = payload.ReadUInt(142, 4);
+            Timeout4 = payload.ReadUInt(146, 3);
+            Increment4 = payload.ReadUInt(149, 11);
         }
     }
 }

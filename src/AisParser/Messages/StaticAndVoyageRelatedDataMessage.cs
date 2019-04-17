@@ -2,8 +2,6 @@
 {
     public class StaticAndVoyageRelatedDataMessage : AisMessage
     {
-        public uint Repeat { get; set; }
-        public uint Mmsi { get; set; }
         public uint AisVersion { get; set; }
         public uint ImoNumber { get; set; }
         public string CallSign { get; set; }
@@ -28,31 +26,29 @@
         {
         }
 
-        public static StaticAndVoyageRelatedDataMessage Create(Payload payload)
+        public StaticAndVoyageRelatedDataMessage(Payload payload)
+            : base(AisMessageType.StaticAndVoyageRelatedData, payload)
         {
-            return new StaticAndVoyageRelatedDataMessage
-            {
-                Repeat = payload.ReadUInt(6, 2),
-                Mmsi = payload.ReadUInt(8, 30),
-                AisVersion = payload.ReadUInt(38, 2),
-                ImoNumber = payload.ReadUInt(40, 30),
-                CallSign = payload.ReadString(70, 42),
-                ShipName = payload.ReadString(112, 120),
-                ShipType = payload.ReadEnum<ShipType>(232, 8),
-                DimensionToBow = payload.ReadUInt(240, 9),
-                DimensionToStern = payload.ReadUInt(249, 9),
-                DimensionToPort = payload.ReadUInt(258, 6),
-                DimensionToStarboard = payload.ReadUInt(264, 6),
-                PositionFixType = payload.ReadEnum<PositionFixType>(270, 4),
-                EtaMonth = payload.ReadUInt(274, 4),
-                EtaDay = payload.ReadUInt(278, 5),
-                EtaHour = payload.ReadUInt(283, 5),
-                EtaMinute = payload.ReadUInt(288, 6),
-                Draught = payload.ReadDraught(294, 8),
-                Destination = payload.ReadString(302, 120),
-                DataTerminalReady = payload.ReadDataTerminalReady(422, 1),
-                Spare = payload.ReadUInt(423, 1)
-            };
+            Repeat = payload.ReadUInt(6, 2);
+            Mmsi = payload.ReadUInt(8, 30);
+            AisVersion = payload.ReadUInt(38, 2);
+            ImoNumber = payload.ReadUInt(40, 30);
+            CallSign = payload.ReadString(70, 42);
+            ShipName = payload.ReadString(112, 120);
+            ShipType = payload.ReadEnum<ShipType>(232, 8);
+            DimensionToBow = payload.ReadUInt(240, 9);
+            DimensionToStern = payload.ReadUInt(249, 9);
+            DimensionToPort = payload.ReadUInt(258, 6);
+            DimensionToStarboard = payload.ReadUInt(264, 6);
+            PositionFixType = payload.ReadEnum<PositionFixType>(270, 4);
+            EtaMonth = payload.ReadUInt(274, 4);
+            EtaDay = payload.ReadUInt(278, 5);
+            EtaHour = payload.ReadUInt(283, 5);
+            EtaMinute = payload.ReadUInt(288, 6);
+            Draught = payload.ReadDraught(294, 8);
+            Destination = payload.ReadString(302, 120);
+            DataTerminalReady = payload.ReadDataTerminalReady(422, 1);
+            Spare = payload.ReadUInt(423, 1);
         }
     }
 }

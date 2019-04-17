@@ -2,8 +2,6 @@
 {
     public class StandardClassBCsPositionReportMessage : AisMessage
     {
-        public uint Repeat { get; set; }
-        public uint Mmsi { get; set; }
         public uint Reserved { get; set; }
         public double SpeedOverGround { get; set; }
         public PositionAccuracy PositionAccuracy { get; set; }
@@ -27,30 +25,26 @@
         {
         }
 
-        public static StandardClassBCsPositionReportMessage Create(Payload payload)
+        public StandardClassBCsPositionReportMessage(Payload payload)
+            : base(AisMessageType.StandardClassBCsPositionReport, payload)
         {
-            return new StandardClassBCsPositionReportMessage
-            {
-                Repeat = payload.ReadUInt(6, 2),
-                Mmsi = payload.ReadUInt(8, 30),
-                Reserved = payload.ReadUInt(38, 8),
-                SpeedOverGround = payload.ReadSpeedOverGround(46, 10),
-                PositionAccuracy = payload.ReadEnum<PositionAccuracy>(56, 1),
-                Longitude = payload.ReadLongitude(57, 28),
-                Latitude = payload.ReadLatitude(85, 27),
-                CourseOverGround = payload.ReadCourseOverGround(112, 12),
-                TrueHeading = payload.ReadTrueHeading(124, 9),
-                Timestamp = payload.ReadUInt(133, 6),
-                RegionalReserved = payload.ReadUInt(139, 2),
-                IsCsUnit = payload.ReadBoolean(141, 1),
-                HasDisplay = payload.ReadBoolean(142, 1),
-                HasDscCapability = payload.ReadBoolean(143, 1),
-                Band = payload.ReadBoolean(144, 1),
-                CanAcceptMessage22 = payload.ReadBoolean(145, 1),
-                Assigned = payload.ReadBoolean(146, 1),
-                Raim = payload.ReadEnum<Raim>(147, 1),
-                RadioStatus = payload.ReadUInt(148, 20)
-            };
+            Reserved = payload.ReadUInt(38, 8);
+            SpeedOverGround = payload.ReadSpeedOverGround(46, 10);
+            PositionAccuracy = payload.ReadEnum<PositionAccuracy>(56, 1);
+            Longitude = payload.ReadLongitude(57, 28);
+            Latitude = payload.ReadLatitude(85, 27);
+            CourseOverGround = payload.ReadCourseOverGround(112, 12);
+            TrueHeading = payload.ReadTrueHeading(124, 9);
+            Timestamp = payload.ReadUInt(133, 6);
+            RegionalReserved = payload.ReadUInt(139, 2);
+            IsCsUnit = payload.ReadBoolean(141, 1);
+            HasDisplay = payload.ReadBoolean(142, 1);
+            HasDscCapability = payload.ReadBoolean(143, 1);
+            Band = payload.ReadBoolean(144, 1);
+            CanAcceptMessage22 = payload.ReadBoolean(145, 1);
+            Assigned = payload.ReadBoolean(146, 1);
+            Raim = payload.ReadEnum<Raim>(147, 1);
+            RadioStatus = payload.ReadUInt(148, 20);
         }
     }
 }

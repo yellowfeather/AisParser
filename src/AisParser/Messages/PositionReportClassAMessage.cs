@@ -7,9 +7,9 @@ namespace AisParser.Messages
         {
         }
 
-        public static PositionReportClassAMessage Create(Payload payload)
+        public PositionReportClassAMessage(Payload payload)
+            : base(AisMessageType.PositionReportClassA, payload)
         {
-            return Create<PositionReportClassAMessage>(payload);
         }
     }
 }
