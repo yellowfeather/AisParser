@@ -2,15 +2,13 @@ using AisParser;
 
 namespace AisParserTests.MessagesTests
 {
-    public class MessageTestBase
+    public abstract class MessageTestBase
     {
         protected readonly Parser Parser;
 
-        public MessageTestBase()
+        protected MessageTestBase()
         {
-            var decoder = new PayloadDecoder();
-            var messageFactory = new AisMessageFactory();
-            Parser = new Parser(decoder, messageFactory);
+            Parser = new Parser();
         }
     }
 }

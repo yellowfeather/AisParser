@@ -10,6 +10,12 @@ namespace AisParser
         private readonly AisMessageFactory _messageFactory;
         private readonly IDictionary<int, string> _fragments = new Dictionary<int, string>();
 
+        public Parser()
+            : this(new PayloadDecoder(), new AisMessageFactory())
+        {
+            
+        }
+
         public Parser(PayloadDecoder payloadDecoder, AisMessageFactory messageFactory)
         {
             _payloadDecoder = payloadDecoder;

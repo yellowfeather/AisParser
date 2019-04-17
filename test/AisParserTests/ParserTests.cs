@@ -12,9 +12,7 @@ namespace AisParserTests
         {
             const string sentence = "!AIVDM,1,1,,B,,0*25";
 
-            var decoder = new PayloadDecoder();
-            var messageFactory = new AisMessageFactory();
-            var parser = new Parser(decoder, messageFactory);
+            var parser = new Parser();
 
             var result = parser.Parse(sentence);
             result.ShouldBeNull();
@@ -25,9 +23,7 @@ namespace AisParserTests
         {
             const string sentence = "!AIVDM,1,1,,A,,0*26";
 
-            var decoder = new PayloadDecoder();
-            var messageFactory = new AisMessageFactory();
-            var parser = new Parser(decoder, messageFactory);
+            var parser = new Parser();
 
             var result = parser.Parse(sentence);
             result.ShouldBeNull();
