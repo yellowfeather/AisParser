@@ -1,0 +1,31 @@
+﻿using AisParser;
+using AisParser.Messages;
+using Shouldly;
+using Xunit;
+
+namespace AisParserTests.MessagesTests
+{
+    public class BinaryAcknowledgeMessageTests : MessageTestBase
+    {
+        [Fact]
+        public void Should_parse_message()
+        {
+            const string sentence = "!AIVDM,1,1,,A,75Mu6d0P17IP?PfGSC29WOvb0<14,0*61";
+
+            var message = Parser.Parse(sentence) as BinaryAcknowledgeMessage;
+            message.ShouldNotBeNull();
+            message.MessageType.ShouldBe(AisMessageType.BinaryAcknowledge);
+            message.Repeat.ShouldBe(0u);
+            message.Mmsi.ShouldBe(366954160u);
+            message.Spare.ShouldBe(0u);
+            message.Mmsi1.ShouldBe(134290840u);
+            message.SequenceNumber1.ShouldBe(0u);
+            message.Mmsi2.ShouldBe(260236771u);
+            message.SequenceNumber2.ShouldBe(1u);
+            message.Mmsi3.ShouldBe(203581311u);
+            message.SequenceNumber3.ShouldBe(3u);
+            message.Mmsi4.ShouldBe(713043985u);
+            message.SequenceNumber4.ShouldBe(0u);
+        }
+    }
+}
