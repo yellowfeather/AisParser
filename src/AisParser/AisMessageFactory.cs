@@ -20,10 +20,10 @@ namespace AisParser
                     return new StaticAndVoyageRelatedDataMessage(payload);
                 //TODO: case AisMessageType.BinaryAddressedMessage:
                 //TODO: case AisMessageType.BinaryAcknowledge:
-                //case AisMessageType.BinaryBroadcastMessage:
-                //case AisMessageType.StandardSarAircraftPositionReport:
-                //case AisMessageType.UtcAndDateInquiry:
-                //case AisMessageType.UtcAndDateResponse:
+                //TODO: case AisMessageType.BinaryBroadcastMessage:
+                //TODO: case AisMessageType.StandardSarAircraftPositionReport:
+                //TODO: case AisMessageType.UtcAndDateInquiry:
+                //TODO: case AisMessageType.UtcAndDateResponse:
                 //case AisMessageType.AddressedSafetyRelatedMessage:
                 //case AisMessageType.SafetyRelatedAcknowledgement:
                 //case AisMessageType.SafetyRelatedBroadcastMessage:
@@ -43,8 +43,15 @@ namespace AisParser
                     return StaticDataReportMessage.Create(payload);
                 //case AisMessageType.SingleSlotBinaryMessage:
                 //case AisMessageType.MultipleSlotBinaryMessageWithCommunicationsState:
-                //TODO: case AisMessageType.PositionReportForLongRangeApplications:
+                case AisMessageType.PositionReportForLongRangeApplications:
+                    return new PositionReportForLongRangeApplicationsMessage(payload);
+                //TODO: 30
+                //TODO: 31
                 //TODO: 32
+                //TODO: 40
+                //TODO: 47
+                //TODO: 51
+                //TODO: 57
                 default:
                     throw new AisMessageException($"Unrecognised message type: {payload.MessageType}");
             }
