@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
-using System.Security.Cryptography;
-
-namespace AisParser.Messages
+﻿namespace AisParser.Messages
 {
     public class BinaryBroadcastMessage : AisMessage
     {
@@ -15,7 +10,7 @@ namespace AisParser.Messages
         public BinaryBroadcastMessage()
             : base(AisMessageType.BinaryBroadcastMessage)
         {
-            
+
         }
 
         public BinaryBroadcastMessage(Payload payload)

@@ -18,7 +18,8 @@ namespace AisParser
                     return new BaseStationReportMessage(payload);
                 case AisMessageType.StaticAndVoyageRelatedData:
                     return new StaticAndVoyageRelatedDataMessage(payload);
-                //TODO: case AisMessageType.BinaryAddressedMessage:
+                case AisMessageType.BinaryAddressedMessage:
+                    return new BinaryAddressedMessage(payload);
                 //TODO: case AisMessageType.BinaryAcknowledge:
                 case AisMessageType.BinaryBroadcastMessage:
                     return new BinaryBroadcastMessage(payload);
