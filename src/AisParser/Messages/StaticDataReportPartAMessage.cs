@@ -5,8 +5,12 @@
         public string ShipName { get; set; }
         public uint Spare { get; set; }
 
-        public StaticDataReportPartAMessage(StaticDataReportMessageInfo info, Payload payload)
-            : base(info)
+        public StaticDataReportPartAMessage()
+        {
+        }
+
+        public StaticDataReportPartAMessage(StaticDataReportMessage message, Payload payload)
+            : base(message)
         {
             ShipName = payload.ReadString(40, 120);
             Spare = payload.ReadUInt(160, 8);

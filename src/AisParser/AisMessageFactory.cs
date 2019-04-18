@@ -40,14 +40,7 @@ namespace AisParser
                 //case AisMessageType.ChannelManagement:
                 //case AisMessageType.GroupAssignmentCommand:
                 case AisMessageType.StaticDataReport:
-                {
-                    var info = new StaticDataReportMessageInfo(payload);
-                    if (info.PartNumber == 0)
-                        return new StaticDataReportPartAMessage(info, payload);
-                    else 
-                        return new StaticDataReportPartBMessage(info, payload);
-                }
-
+                    return StaticDataReportMessage.Create(payload);
                 //case AisMessageType.SingleSlotBinaryMessage:
                 //case AisMessageType.MultipleSlotBinaryMessageWithCommunicationsState:
                 //TODO: case AisMessageType.PositionReportForLongRangeApplications:

@@ -14,8 +14,12 @@
         public uint MothershipMmsi { get; set; }
         public uint Spare { get; set; }
 
-        public StaticDataReportPartBMessage(StaticDataReportMessageInfo info, Payload payload)
-            : base(info)
+        public StaticDataReportPartBMessage()
+        {
+        }
+
+        public StaticDataReportPartBMessage(StaticDataReportMessage message, Payload payload)
+            : base(message)
         {
             ShipType = payload.ReadEnum<ShipType>(40, 8);
             VendorId = payload.ReadString(48, 18);
