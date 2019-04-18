@@ -20,7 +20,7 @@ namespace AisParser
         AssignmentModeCommand = 16,
         DgnssBinaryBroadcastMessage = 17,
         StandardClassBCsPositionReport = 18,
-        ExtendedClassBEquipmentPositionReport = 19,
+        ExtendedClassBCsPositionReport = 19,
         DataLinkManagement = 20,
         AidToNavigationReport = 21,
         ChannelManagement = 22,

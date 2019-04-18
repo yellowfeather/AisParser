@@ -29,14 +29,15 @@ namespace AisParser
                 //TODO: case AisMessageType.UtcAndDateInquiry:
                 //TODO: case AisMessageType.UtcAndDateResponse:
                 //case AisMessageType.AddressedSafetyRelatedMessage:
-                //case AisMessageType.SafetyRelatedAcknowledgement:
+                //TODO: case AisMessageType.SafetyRelatedAcknowledgement:
                 //case AisMessageType.SafetyRelatedBroadcastMessage:
                 //TODO: case AisMessageType.Interrogation:
                 //case AisMessageType.AssignmentModeCommand:
                 //case AisMessageType.DgnssBinaryBroadcastMessage:
                 case AisMessageType.StandardClassBCsPositionReport:
                     return new StandardClassBCsPositionReportMessage(payload);
-                //case AisMessageType.ExtendedClassBEquipmentPositionReport:
+                case AisMessageType.ExtendedClassBCsPositionReport:
+                    return new ExtendedClassBCsPositionReportMessage(payload);
                 case AisMessageType.DataLinkManagement:
                     return new DataLinkManagementMessage(payload);
                 case AisMessageType.AidToNavigationReport:
