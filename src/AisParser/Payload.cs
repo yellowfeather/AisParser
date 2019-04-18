@@ -32,6 +32,18 @@ namespace AisParser
             return Convert.ToUInt32(bitValue, 2);
         }
 
+        public uint? ReadMmsi(int startIndex, int length)
+        {
+            var bitValue = Substring(startIndex, length);
+            if (string.IsNullOrWhiteSpace(bitValue))
+                return null;
+
+            var value = Convert.ToUInt32(bitValue, 2);
+            if (value == 0)
+                return null;
+            return value;
+        }
+
         public int ReadInt(int startIndex, int length)
         {
             var bitValue = Substring(startIndex, length);
