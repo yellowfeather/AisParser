@@ -1,0 +1,26 @@
+﻿using AisParser;
+using AisParser.Messages;
+using Shouldly;
+using Xunit;
+
+namespace AisParserTests.MessagesTests
+{
+    public class AddressedSafetyRelatedMessageTests : MessageTestBase
+    {
+        [Fact]
+        public void Should_parse_message()
+        {
+            const string sentence = "!AIVDM,1,1,,A,<5MwpVn0AAup=C7P6B?=Pknnqqqoho0,2*17";
+
+            var message = Parser.Parse(sentence) as AddressedSafetyRelatedMessage;
+            message.ShouldNotBeNull();
+            message.MessageType.ShouldBe(AisMessageType.AddressedSafetyRelatedMessage);
+            message.Repeat.ShouldBe(0u);
+            message.Mmsi.ShouldBe(366999707u);
+            message.SequenceNumber.ShouldBe(1u);
+            message.DestinationMmsi.ShouldBe(538003422u);
+            message.RetransmitFlag.ShouldBeFalse();
+            message.Text.ShouldBe("MSG FROM 366999707");
+        }
+    }
+}

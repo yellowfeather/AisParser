@@ -30,7 +30,8 @@ namespace AisParser
                     return new UtcAndDateInquiryMessage(payload);
                 case AisMessageType.UtcAndDateResponse:
                     return new UtcAndDateResponseMessage(payload);
-                //case AisMessageType.AddressedSafetyRelatedMessage:
+                case AisMessageType.AddressedSafetyRelatedMessage:
+                    return new AddressedSafetyRelatedMessage(payload);
                 //TODO: case AisMessageType.SafetyRelatedAcknowledgement:
                 //case AisMessageType.SafetyRelatedBroadcastMessage:
                 //TODO: case AisMessageType.Interrogation:
