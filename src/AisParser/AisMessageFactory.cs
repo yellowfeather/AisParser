@@ -26,7 +26,8 @@ namespace AisParser
                     return new BinaryBroadcastMessage(payload);
                 case AisMessageType.StandardSarAircraftPositionReport:
                     return new StandardSarAircraftPositionReportMessage(payload);
-                //TODO: case AisMessageType.UtcAndDateInquiry:
+                case AisMessageType.UtcAndDateInquiry:
+                    return new UtcAndDateInquiryMessage(payload);
                 //TODO: case AisMessageType.UtcAndDateResponse:
                 //case AisMessageType.AddressedSafetyRelatedMessage:
                 //TODO: case AisMessageType.SafetyRelatedAcknowledgement:
