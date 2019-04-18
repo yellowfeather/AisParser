@@ -15,6 +15,7 @@
         public uint Spare { get; set; }
 
         public StaticDataReportPartBMessage()
+            : base(1)
         {
         }
 

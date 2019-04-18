@@ -6,6 +6,7 @@
         public uint Spare { get; set; }
 
         public StaticDataReportPartAMessage()
+            : base(0)
         {
         }
 

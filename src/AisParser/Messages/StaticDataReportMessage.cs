@@ -7,7 +7,12 @@
         protected StaticDataReportMessage()
             : base(AisMessageType.StaticDataReport)
         {
+        }
 
+        protected StaticDataReportMessage(uint partNumber)
+            : base(AisMessageType.StaticDataReport)
+        {
+            PartNumber = partNumber;
         }
 
         protected StaticDataReportMessage(StaticDataReportMessage message)
