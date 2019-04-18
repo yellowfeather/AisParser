@@ -20,7 +20,8 @@ namespace AisParser
                     return new StaticAndVoyageRelatedDataMessage(payload);
                 //TODO: case AisMessageType.BinaryAddressedMessage:
                 //TODO: case AisMessageType.BinaryAcknowledge:
-                //TODO: case AisMessageType.BinaryBroadcastMessage:
+                case AisMessageType.BinaryBroadcastMessage:
+                    return new BinaryBroadcastMessage(payload);
                 case AisMessageType.StandardSarAircraftPositionReport:
                     return new StandardSarAircraftPositionReportMessage(payload);
                 //TODO: case AisMessageType.UtcAndDateInquiry:
