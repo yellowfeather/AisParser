@@ -27,7 +27,7 @@ namespace AisParserTests
                 var settings = new JsonSerializerSettings();
 
                 settings.Converters.Add(JsonSubtypesConverterBuilder
-                    .Of(typeof(AisParser.AisMessage), "JsonMessageType")
+                    .Of(typeof(AisMessage), "JsonMessageType")
                     .RegisterSubtype(typeof(PositionReportClassAMessage), (uint)AisMessageType.PositionReportClassA)
                     .RegisterSubtype(typeof(PositionReportClassAAssignedScheduleMessage), (uint)AisMessageType.PositionReportClassAAssignedSchedule)
                     .RegisterSubtype(typeof(PositionReportClassAResponseToInterrogationMessage), (uint)AisMessageType.PositionReportClassAResponseToInterrogation)

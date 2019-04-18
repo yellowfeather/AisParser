@@ -132,7 +132,6 @@ namespace AisParserTests.MessagesTests
             message.RadioStatus.ShouldBe(166088u);
         }
 
-
         [Fact]
         public void Should_parse_message_20190212_154105()
         {
