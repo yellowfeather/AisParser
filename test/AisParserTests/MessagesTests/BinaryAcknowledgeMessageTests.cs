@@ -28,7 +28,8 @@ namespace AisParserTests.MessagesTests
             message.SequenceNumber4.ShouldBe(0u);
         }
 
-        [Fact]public void Should_parse_message_20190212_654382()
+        [Fact]
+        public void Should_parse_message_20190212_654382()
         {
             const string sentence = "!AIVDM,1,1,,A,702:oP3dTnnp,0*65";
 

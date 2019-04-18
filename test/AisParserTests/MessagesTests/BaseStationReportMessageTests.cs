@@ -131,5 +131,31 @@ namespace AisParserTests.MessagesTests
             message.Raim.ShouldBe(Raim.NotInUse);
             message.RadioStatus.ShouldBe(166088u);
         }
+
+
+        [Fact]
+        public void Should_parse_message_20190212_154105()
+        {
+            const string sentence = "!AIVDM,1,1,,A,402MN7iv<V5r,0*16";
+
+            var message = Parser.Parse(sentence) as BaseStationReportMessage;
+            message.ShouldNotBeNull();
+            message.MessageType.ShouldBe(AisMessageType.BaseStationReport);
+            message.Repeat.ShouldBe(0u);
+            message.Mmsi.ShouldBe(2579999u);
+            message.Year.ShouldBe(2019u);
+            message.Month.ShouldBe(2u);
+            message.Day.ShouldBe(12u);
+            message.Hour.ShouldBe(5u);
+            message.Minute.ShouldBe(58u);
+            message.Second.ShouldBe(0u);
+            message.PositionAccuracy.ShouldBe(PositionAccuracy.Low);
+            message.Longitude.ShouldBe(0d, 0.000001d);
+            message.Latitude.ShouldBe(0d, 0.000001d);
+            message.PositionFixType.ShouldBe(PositionFixType.Undefined1);
+            message.Spare.ShouldBe(0u);
+            message.Raim.ShouldBe(Raim.NotInUse);
+            message.RadioStatus.ShouldBe(0u);
+        }
     }
 }

@@ -29,7 +29,7 @@
             Day = payload.ReadUInt(56, 5);
             Hour = payload.ReadUInt(61, 5);
             Minute = payload.ReadUInt(66, 6);
-            Second = payload.ReadUInt(72, 6);
+            Second = payload.ReadNullableUInt(72, 6) ?? 0;
             PositionAccuracy = payload.ReadEnum<PositionAccuracy>(78, 1);
             Longitude = payload.ReadLongitude(79, 28);
             Latitude = payload.ReadLatitude(107, 27);
