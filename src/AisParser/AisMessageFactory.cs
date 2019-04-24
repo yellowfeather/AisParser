@@ -36,7 +36,8 @@ namespace AisParser
                 case AisMessageType.SafetyRelatedAcknowledgement:
                     return new SafetyRelatedAcknowledgementMessage(payload);
                 //case AisMessageType.SafetyRelatedBroadcastMessage:
-                //TODO: case AisMessageType.Interrogation:
+                case AisMessageType.Interrogation:
+                    return new InterrogationMessage(payload);
                 //case AisMessageType.AssignmentModeCommand:
                 //case AisMessageType.DgnssBinaryBroadcastMessage:
                 case AisMessageType.StandardClassBCsPositionReport:

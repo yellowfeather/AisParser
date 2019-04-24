@@ -26,6 +26,15 @@ namespace AisParser
             return (T) Enum.ToObject(typeof(T), value);
         }
 
+        public AisMessageType? ReadNullableMessageType(int startIndex, int length)
+        {
+            var bitValue = Substring(startIndex, length);
+            var value = Convert.ToInt32(bitValue, 2);
+            if (Enum.IsDefined(typeof(AisMessageType), value))
+                return (AisMessageType) Enum.ToObject(typeof(AisMessageType), value);
+            return null;
+        }
+
         public uint ReadUInt(int startIndex, int length)
         {
             var bitValue = Substring(startIndex, length);
