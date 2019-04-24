@@ -131,5 +131,30 @@ namespace AisParserTests.MessagesTests
             message.Raim.ShouldBe(Raim.NotInUse);
             message.RadioStatus.ShouldBe(100537u);
         }
+
+        [Fact]
+        public void Should_parse_message_with_type_0()
+        {
+            const string sentence = "!AIVDM,1,1,,B,001vUEEEOP@p2mLWh0nWvd107@jc,0*15";
+
+            var message = Parser.Parse(sentence) as PositionReportClassAMessage;
+            message.ShouldNotBeNull();
+            message.MessageType.ShouldBe(AisMessageType.PositionReportClassA);
+            message.Repeat.ShouldBe(0u);
+            message.Mmsi.ShouldBe(2073941u);
+            message.NavigationStatus.ShouldBe(NavigationStatus.Moored);
+            message.RateOfTurn.ShouldBe(85); // TODO: should this be 322.5 ?
+            message.SpeedOverGround.ShouldBe(99.2);
+            message.PositionAccuracy.ShouldBe(PositionAccuracy.Low);
+            message.Longitude.ShouldBe(-211.4531500d, 0.000001d);  // TODO: check longitude value
+            message.Latitude.ShouldBe(69.4685233d, 0.000001d);
+            message.CourseOverGround.ShouldBe(204.2);
+            message.TrueHeading.ShouldBe(384u);
+            message.Timestamp.ShouldBe(32u);
+            message.ManeuverIndicator.ShouldBe(ManeuverIndicator.NotAvailable);
+            message.Spare.ShouldBe(1u);
+            message.Raim.ShouldBe(Raim.InUse);
+            message.RadioStatus.ShouldBe(330923u);
+        }
     }
 }

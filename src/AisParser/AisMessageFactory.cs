@@ -8,6 +8,7 @@ namespace AisParser
         {
             switch (payload.MessageType)
             {
+                case 0:
                 case AisMessageType.PositionReportClassA:
                     return new PositionReportClassAMessage(payload);
                 case AisMessageType.PositionReportClassAAssignedSchedule:
