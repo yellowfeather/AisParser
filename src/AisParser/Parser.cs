@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Text;
 
@@ -8,7 +9,7 @@ namespace AisParser
     {
         private readonly PayloadDecoder _payloadDecoder;
         private readonly AisMessageFactory _messageFactory;
-        private readonly IDictionary<int, string> _fragments = new Dictionary<int, string>();
+        private readonly IDictionary<int, string> _fragments = new ConcurrentDictionary<int, string>();
 
         public Parser()
             : this(new PayloadDecoder(), new AisMessageFactory())
