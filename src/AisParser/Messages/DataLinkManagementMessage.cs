@@ -1,23 +1,42 @@
-﻿namespace AisParser.Messages
+﻿using MessagePack;
+namespace AisParser.Messages
 {
+    [MessagePackObject]
     public class DataLinkManagementMessage : AisMessage
     {
+        [Key(3)]
         public uint Spare { get; set; }
+        [Key(4)]
         public uint Offset1 { get; set; }
+        [Key(5)]
         public uint ReservedSlots1 { get; set; }
+        [Key(6)]
         public uint Timeout1 { get; set; }
+        [Key(7)]
         public uint Increment1 { get; set; }
+        [Key(8)]
         public uint Offset2 { get; set; }
+        [Key(9)]
         public uint ReservedSlots2 { get; set; }
+        [Key(10)]
         public uint Timeout2 { get; set; }
+        [Key(11)]
         public uint Increment2 { get; set; }
+        [Key(12)]
         public uint Offset3 { get; set; }
+        [Key(13)]
         public uint ReservedSlots3 { get; set; }
+        [Key(14)]
         public uint Timeout3 { get; set; }
+        [Key(15)]
         public uint Increment3 { get; set; }
+        [Key(16)]
         public uint Offset4 { get; set; }
+        [Key(17)]
         public uint ReservedSlots4 { get; set; }
+        [Key(18)]
         public uint Timeout4 { get; set; }
+        [Key(19)]
         public uint Increment4 { get; set; }
 
         public DataLinkManagementMessage()

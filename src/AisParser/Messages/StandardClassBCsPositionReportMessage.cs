@@ -1,23 +1,42 @@
-﻿namespace AisParser.Messages
+﻿using MessagePack;
+namespace AisParser.Messages
 {
+    [MessagePackObject]
     public class StandardClassBCsPositionReportMessage : AisMessage
     {
+        [Key(3)]
         public uint Reserved { get; set; }
+        [Key(4)]
         public double SpeedOverGround { get; set; }
+        [Key(5)]
         public PositionAccuracy PositionAccuracy { get; set; }
+        [Key(6)]
         public double Longitude { get; set; }
+        [Key(7)]
         public double Latitude { get; set; }
+        [Key(8)]
         public double CourseOverGround { get; set; }
+        [Key(9)]
         public uint? TrueHeading { get; set; }
+        [Key(10)]
         public uint Timestamp { get; set; }
+        [Key(11)]
         public uint RegionalReserved { get; set; }
+        [Key(12)]
         public bool IsCsUnit { get; set; }
+        [Key(13)]
         public bool HasDisplay { get; set; }
+        [Key(14)]
         public bool HasDscCapability { get; set; }
+        [Key(15)]
         public bool Band { get; set; }
+        [Key(16)]
         public bool CanAcceptMessage22 { get; set; }
+        [Key(17)]
         public bool Assigned { get; set; }
+        [Key(18)]
         public Raim Raim { get; set; }
+        [Key(19)]
         public uint RadioStatus { get; set; }
 
         public StandardClassBCsPositionReportMessage()

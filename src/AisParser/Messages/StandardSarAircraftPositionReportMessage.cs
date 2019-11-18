@@ -1,19 +1,34 @@
-﻿namespace AisParser.Messages
+﻿using MessagePack;
+namespace AisParser.Messages
 {
+    [MessagePackObject]
     public class StandardSarAircraftPositionReportMessage : AisMessage
     {
+        [Key(3)]
         public uint Altitude { get; set; }
+        [Key(4)]
         public uint SpeedOverGround { get; set; }
+        [Key(5)]
         public PositionAccuracy PositionAccuracy { get; set; }
+        [Key(6)]
         public double Longitude { get; set; }
+        [Key(7)]
         public double Latitude { get; set; }
+        [Key(8)]
         public double CourseOverGround { get; set; }
+        [Key(9)]
         public uint Timestamp { get; set; }
+        [Key(10)]
         public uint Reserved { get; set; }
+        [Key(11)]
         public bool DataTerminalReady { get; set; }
+        [Key(12)]
         public uint Spare { get; set; }
+        [Key(13)]
         public bool Assigned { get; set; }
+        [Key(14)]
         public Raim Raim { get; set; }
+        [Key(15)]
         public uint RadioStatus { get; set; }
 
         public StandardSarAircraftPositionReportMessage()

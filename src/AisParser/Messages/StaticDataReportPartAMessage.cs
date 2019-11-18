@@ -1,8 +1,12 @@
-﻿namespace AisParser.Messages
+﻿using MessagePack;
+namespace AisParser.Messages
 {
+    [MessagePackObject]
     public class StaticDataReportPartAMessage : StaticDataReportMessage
     {
+        [Key(4)]
         public string ShipName { get; set; }
+        [Key(5)]
         public uint Spare { get; set; }
 
         public StaticDataReportPartAMessage()

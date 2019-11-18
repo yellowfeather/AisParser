@@ -1,10 +1,16 @@
-﻿namespace AisParser.Messages
+﻿using MessagePack;
+namespace AisParser.Messages
 {
+    [MessagePackObject]
     public class BinaryBroadcastMessage : AisMessage
     {
+        [Key(3)]
         public uint Spare { get; set; }
+        [Key(4)]
         public uint DesignatedAreaCode { get; set; }
+        [Key(5)]
         public uint FunctionalId { get; set; }
+        [Key(6)]
         public string Data { get; set; }
 
         public BinaryBroadcastMessage()

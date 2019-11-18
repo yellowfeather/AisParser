@@ -1,19 +1,34 @@
-﻿namespace AisParser.Messages
+﻿using MessagePack;
+namespace AisParser.Messages
 {
+    [MessagePackObject]
     public class UtcAndDateResponseMessage : AisMessage
     {
+        [Key(3)]
         public uint Year { get; set; }
+        [Key(4)]
         public uint Month { get; set; }
+        [Key(5)]
         public uint Day { get; set; }
+        [Key(6)]
         public uint Hour { get; set; }
+        [Key(7)]
         public uint Minute { get; set; }
+        [Key(8)]
         public uint Second { get; set; }
+        [Key(9)]
         public PositionAccuracy PositionAccuracy { get; set; }
+        [Key(10)]
         public double Longitude { get; set; }
+        [Key(11)]
         public double Latitude { get; set; }
+        [Key(12)]
         public PositionFixType PositionFixType { get; set; }
+        [Key(13)]
         public uint Spare { get; set; }
+        [Key(14)]
         public Raim Raim { get; set; }
+        [Key(15)]
         public uint RadioStatus { get; set; }
 
         public UtcAndDateResponseMessage()

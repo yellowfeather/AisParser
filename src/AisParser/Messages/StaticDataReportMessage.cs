@@ -1,7 +1,10 @@
-﻿namespace AisParser.Messages
+﻿using MessagePack;
+namespace AisParser.Messages
 {
+    [MessagePackObject]
     public class StaticDataReportMessage : AisMessage
     {
+        [Key(3)]
         public uint PartNumber { get; }
 
         protected StaticDataReportMessage()

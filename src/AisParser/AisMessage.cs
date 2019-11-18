@@ -1,9 +1,15 @@
+using MessagePack;
+
 namespace AisParser
 {
+    [MessagePackObject]
     public abstract class AisMessage
     {
+        [Key(0)]
         public AisMessageType MessageType { get; }
+        [Key(1)]
         public uint Repeat { get; set; }
+        [Key(2)]
         public uint Mmsi { get; set; }
 
         protected AisMessage(AisMessageType messageType)

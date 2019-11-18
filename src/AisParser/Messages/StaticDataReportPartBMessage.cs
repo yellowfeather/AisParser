@@ -1,17 +1,30 @@
-﻿namespace AisParser.Messages
+﻿using MessagePack;
+namespace AisParser.Messages
 {
+    [MessagePackObject]
     public class StaticDataReportPartBMessage : StaticDataReportMessage
     {
+        [Key(4)]
         public ShipType ShipType { get; set; }
+        [Key(5)]
         public string VendorId { get; set; }
+        [Key(6)]
         public uint UnitModelCode { get; set; }
+        [Key(7)]
         public uint SerialNumber { get; set; }
+        [Key(8)]
         public string CallSign { get; set; }
+        [Key(9)]
         public uint DimensionToBow { get; set; }
+        [Key(10)]
         public uint DimensionToStern { get; set; }
+        [Key(11)]
         public uint DimensionToPort { get; set; }
+        [Key(12)]
         public uint DimensionToStarboard { get; set; }
+        [Key(13)]
         public uint MothershipMmsi { get; set; }
+        [Key(14)]
         public uint Spare { get; set; }
 
         public StaticDataReportPartBMessage()

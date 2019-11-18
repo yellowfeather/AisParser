@@ -64,7 +64,8 @@ namespace AisParser
                 //TODO: 51
                 //TODO: 57
                 default:
-                    throw new AisMessageException($"Unrecognised message type: {payload.MessageType}");
+                    return null;
+                //    throw new AisMessageException($"Unrecognised message type: {payload.MessageType}");
             }
         }
     }
