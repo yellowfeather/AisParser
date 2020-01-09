@@ -72,8 +72,7 @@ namespace AisParser
             //Field 5: Radio Channel Code (A or B)
             //Field 6: Payload
             //Field 7: 6 bit Boundary Padding (Zero seems to always be OK)?
-
-
+            
             string sentenceType = "AIVDM";
             int countOfFragments = 1;
             int fragmentNumber = 1;
@@ -100,8 +99,8 @@ namespace AisParser
             sentence += ",";
             sentence += boundaryPadding.ToString("0");
 
-            var calculatedChecksum = CalculateChecksum(sentence);
-            sentence += "*" + calculatedChecksum.ToString("00");
+            var calculatedChecksum = GenerateChecksum(sentence);
+            sentence += "*" + calculatedChecksum;
 
             return sentence;
         }
@@ -138,6 +137,11 @@ namespace AisParser
             return _payloadDecoder.Decode(encodedPayload, numFillBits);
         }
 
+        public string GenerateChecksum(string sentence)
+        {
+            var checksum = CalculateChecksum(sentence);
+            return Convert.ToString(checksum, 16).ToUpper();
+        }
         public int ExtractChecksum(string sentence, int checksumIndex)
         {
             var checksum = sentence.Substring(checksumIndex + 1);
