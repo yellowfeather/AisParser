@@ -1,9 +1,24 @@
 using AisParser.Messages;
+using System;
 
 namespace AisParser
 {
     public class AisMessageFactory
     {
+        public Payload Encode<T>(T message) where T : AisMessage
+        {
+            Payload payload = new Payload();
+            switch (message)
+            {
+                case PositionReportClassAMessage t1:
+                    t1.Encode(payload);
+                    break;
+                default:
+                    return null;
+            }
+            return payload;
+        }
+
         public AisMessage Create(Payload payload)
         {
             switch (payload.MessageType)

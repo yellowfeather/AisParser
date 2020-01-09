@@ -55,5 +55,24 @@ namespace AisParser.Messages
             Raim = payload.ReadEnum<Raim>(148, 1);
             RadioStatus = payload.ReadUInt(149, 19);
         }
+
+        public override void Encode(Payload payload)
+        {
+            payload.WriteEnum(AisMessageType.PositionReportClassA, 6);
+            base.Encode(payload);
+            payload.WriteEnum<NavigationStatus>(NavigationStatus, 4);
+            payload.WriteRateOfTurn((int)RateOfTurn, 8);
+            payload.WriteSpeedOverGround(SpeedOverGround, 10);
+            payload.WriteEnum<PositionAccuracy>(PositionAccuracy, 1);
+            payload.WriteLongitude(Longitude, 28);
+            payload.WriteLatitude(Latitude, 27);
+            payload.WriteCourseOverGround(CourseOverGround, 12);
+            payload.WriteTrueHeading((uint)TrueHeading, 9);
+            payload.WriteUInt(Timestamp, 6);
+            payload.WriteEnum<ManeuverIndicator>(ManeuverIndicator, 2);
+            payload.WriteUInt(Spare, 3);
+            payload.WriteEnum<Raim>(Raim, 1);
+            payload.WriteUInt(RadioStatus, 19);
+        }
     }
 }
