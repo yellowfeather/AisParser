@@ -9,18 +9,20 @@ namespace AisParser
     {
         private readonly PayloadDecoder _payloadDecoder;
         private readonly AisMessageFactory _messageFactory;
+        private readonly PayloadEncoder _payloadEncoder;
         private readonly IDictionary<int, string> _fragments = new ConcurrentDictionary<int, string>();
 
         public Parser()
-            : this(new PayloadDecoder(), new AisMessageFactory())
+            : this(new PayloadDecoder(), new AisMessageFactory(), new PayloadEncoder())
         {
             
         }
 
-        public Parser(PayloadDecoder payloadDecoder, AisMessageFactory messageFactory)
+        public Parser(PayloadDecoder payloadDecoder, AisMessageFactory messageFactory, PayloadEncoder payloadEncoder)
         {
             _payloadDecoder = payloadDecoder;
             _messageFactory = messageFactory;
+            _payloadEncoder = payloadEncoder;
         }
 
         public AisMessage Parse(string sentence)
@@ -58,13 +60,61 @@ namespace AisParser
             return payload == null ? null : _messageFactory.Create(payload);
         }
 
+        public string Parse<T>(T aisMessage) where T : AisMessage
+        {
+            string sentence = "";
+
+            // Example: !AIVDM,1,1,,A,B6CdCm0t3`tba35f@V9faHi7kP06,0*58
+            //Field 1: Sentence Type
+            //Field 2: Count Of Fragments
+            //Field 3: Fragment Number
+            //Field 4: Sequential Messages ID for multi-sentence messages (blank for none)
+            //Field 5: Radio Channel Code (A or B)
+            //Field 6: Payload
+            //Field 7: 6 bit Boundary Padding (Zero seems to always be OK)?
+            
+            string sentenceType = "AIVDM";
+            int countOfFragments = 1;
+            int fragmentNumber = 1;
+            int sequentialMessageId = 0;
+            string radioChannel = "A";
+            int boundaryPadding = 0;
+
+            var payload = _messageFactory.Encode<T>(aisMessage);
+            var payloadEncoded = _payloadEncoder.EncodeSixBitAis(payload);
+
+            //Build the full sentence
+            sentence += "!";
+            sentence += sentenceType;
+            sentence += ",";
+            sentence += countOfFragments.ToString("0");
+            sentence += ",";
+            sentence += fragmentNumber.ToString("0");
+            sentence += ",";
+            if(sequentialMessageId != 0) sentence += sequentialMessageId.ToString("0");
+            sentence += ",";
+            sentence += radioChannel;
+            sentence += ",";
+            sentence += payloadEncoded;
+            sentence += ",";
+            sentence += boundaryPadding.ToString("0");
+
+            var calculatedChecksum = GenerateChecksum(sentence);
+            sentence += "*" + calculatedChecksum;
+
+            return sentence;
+        }
+
         private Payload DecodePayload(string encodedPayload, string[] sentenceParts)
         {
             var numFragments = Convert.ToInt32(sentenceParts[1]);
             var numFillBits = Convert.ToInt32(sentenceParts[6]);
 
-            if (numFragments == 1) 
-                return _payloadDecoder.Decode(encodedPayload, numFillBits);
+            if (numFragments == 1)
+            {
+                var decoded = _payloadDecoder.Decode(encodedPayload, numFillBits);
+                return decoded;
+            }
 
             var fragmentNumber = Convert.ToInt32(sentenceParts[2]);
             var messageId = Convert.ToInt32(sentenceParts[3]);
@@ -87,6 +137,11 @@ namespace AisParser
             return _payloadDecoder.Decode(encodedPayload, numFillBits);
         }
 
+        public string GenerateChecksum(string sentence)
+        {
+            var checksum = CalculateChecksum(sentence);
+            return Convert.ToString(checksum, 16).ToUpper();
+        }
         public int ExtractChecksum(string sentence, int checksumIndex)
         {
             var checksum = sentence.Substring(checksumIndex + 1);

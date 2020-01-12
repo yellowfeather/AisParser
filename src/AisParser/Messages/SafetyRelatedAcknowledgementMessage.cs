@@ -1,15 +1,26 @@
-﻿namespace AisParser.Messages
+﻿using MessagePack;
+namespace AisParser.Messages
 {
+    [MessagePackObject]
     public class SafetyRelatedAcknowledgementMessage : AisMessage
     {
+        [Key(3)]
         public uint Spare { get; set; }
+        [Key(4)]
         public uint SequenceNumber1 { get; set; }
+        [Key(5)]
         public uint Mmsi1 { get; set; }
+        [Key(6)]
         public uint SequenceNumber2 { get; set; }
+        [Key(7)]
         public uint? Mmsi2 { get; set; }
+        [Key(8)]
         public uint SequenceNumber3 { get; set; }
+        [Key(9)]
         public uint? Mmsi3 { get; set; }
+        [Key(10)]
         public uint SequenceNumber4 { get; set; }
+        [Key(11)]
         public uint? Mmsi4 { get; set; }
 
         public SafetyRelatedAcknowledgementMessage()

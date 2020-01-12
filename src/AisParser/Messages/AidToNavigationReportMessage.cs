@@ -1,24 +1,44 @@
-﻿namespace AisParser.Messages
+﻿using MessagePack;
+namespace AisParser.Messages
 {
+    [MessagePackObject]
     public class AidToNavigationReportMessage : AisMessage
     {
+        [Key(3)]
         public NavigationalAidType NavigationalAidType { get; set; }
+        [Key(4)]
         public string Name { get; set; }
+        [Key(5)]
         public PositionAccuracy PositionAccuracy { get; set; }
+        [Key(6)]
         public double Longitude { get; set; }
+        [Key(7)]
         public double Latitude { get; set; }
+        [Key(8)]
         public uint DimensionToBow { get; set; }
+        [Key(9)]
         public uint DimensionToStern { get; set; }
+        [Key(10)]
         public uint DimensionToPort { get; set; }
+        [Key(11)]
         public uint DimensionToStarboard { get; set; }
+        [Key(12)]
         public PositionFixType PositionFixType { get; set; }
+        [Key(13)]
         public uint Timestamp { get; set; }
+        [Key(14)]
         public bool OffPosition { get; set; }
+        [Key(15)]
         public uint RegionalReserved { get; set; }
+        [Key(16)]
         public Raim Raim { get; set; }
+        [Key(17)]
         public bool VirtualAid { get; set; }
+        [Key(18)]
         public bool Assigned { get; set; }
+        [Key(19)]
         public uint Spare { get; set; }
+        [Key(20)]
         public string NameExtension { get; set; }
 
         public AidToNavigationReportMessage()

@@ -1,24 +1,44 @@
-﻿namespace AisParser.Messages
+﻿using MessagePack;
+namespace AisParser.Messages
 {
+    [MessagePackObject]
     public class StaticAndVoyageRelatedDataMessage : AisMessage
     {
+        [Key(3)]
         public uint AisVersion { get; set; }
+        [Key(4)]
         public uint ImoNumber { get; set; }
+        [Key(5)]
         public string CallSign { get; set; }
+        [Key(6)]
         public string ShipName { get; set; }
+        [Key(7)]
         public ShipType ShipType { get; set; }
+        [Key(8)]
         public uint DimensionToBow { get; set; }
+        [Key(9)]
         public uint DimensionToStern { get; set; }
+        [Key(10)]
         public uint DimensionToPort { get; set; }
+        [Key(11)]
         public uint DimensionToStarboard { get; set; }
+        [Key(12)]
         public PositionFixType PositionFixType { get; set; }
+        [Key(13)]
         public uint EtaMonth { get; set; }
+        [Key(14)]
         public uint EtaDay { get; set; }
+        [Key(15)]
         public uint EtaHour { get; set; }
+        [Key(16)]
         public uint EtaMinute { get; set; }
+        [Key(17)]
         public double Draught { get; set; }
+        [Key(18)]
         public string Destination { get; set; }
+        [Key(19)]
         public bool DataTerminalReady { get; set; }
+        [Key(20)]
         public uint Spare { get; set; }
 
         public StaticAndVoyageRelatedDataMessage()

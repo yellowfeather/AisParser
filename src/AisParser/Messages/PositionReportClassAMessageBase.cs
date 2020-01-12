@@ -1,19 +1,34 @@
+using MessagePack;
 namespace AisParser.Messages
 {
+    [MessagePackObject]
     public abstract class PositionReportClassAMessageBase : AisMessage
     {
+        [Key(3)]
         public NavigationStatus NavigationStatus { get; set; }
+        [Key(4)]
         public int? RateOfTurn { get; set; }
+        [Key(5)]
         public double SpeedOverGround { get; set; }
+        [Key(6)]
         public PositionAccuracy PositionAccuracy { get; set; }
+        [Key(7)]
         public double Longitude { get; set; }
+        [Key(8)]
         public double Latitude { get; set; }
+        [Key(9)]
         public double CourseOverGround { get; set; }
+        [Key(10)]
         public uint? TrueHeading { get; set; }
+        [Key(11)]
         public uint Timestamp { get; set; }
+        [Key(12)]
         public ManeuverIndicator ManeuverIndicator { get; set; }
+        [Key(13)]
         public uint Spare { get; set; }
+        [Key(14)]
         public Raim Raim { get; set; }
+        [Key(15)]
         public uint RadioStatus { get; set; }
 
         protected PositionReportClassAMessageBase(AisMessageType messageType)
@@ -39,6 +54,25 @@ namespace AisParser.Messages
             Spare = payload.ReadUInt(145, 3);
             Raim = payload.ReadEnum<Raim>(148, 1);
             RadioStatus = payload.ReadUInt(149, 19);
+        }
+
+        public override void Encode(Payload payload)
+        {
+            payload.WriteEnum(AisMessageType.PositionReportClassA, 6);
+            base.Encode(payload);
+            payload.WriteEnum<NavigationStatus>(NavigationStatus, 4);
+            payload.WriteRateOfTurn((int)RateOfTurn, 8);
+            payload.WriteSpeedOverGround(SpeedOverGround, 10);
+            payload.WriteEnum<PositionAccuracy>(PositionAccuracy, 1);
+            payload.WriteLongitude(Longitude, 28);
+            payload.WriteLatitude(Latitude, 27);
+            payload.WriteCourseOverGround(CourseOverGround, 12);
+            payload.WriteTrueHeading((uint)TrueHeading, 9);
+            payload.WriteUInt(Timestamp, 6);
+            payload.WriteEnum<ManeuverIndicator>(ManeuverIndicator, 2);
+            payload.WriteUInt(Spare, 3);
+            payload.WriteEnum<Raim>(Raim, 1);
+            payload.WriteUInt(RadioStatus, 19);
         }
     }
 }

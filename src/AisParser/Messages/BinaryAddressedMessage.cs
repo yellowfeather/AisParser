@@ -1,13 +1,22 @@
-﻿namespace AisParser.Messages
+﻿using MessagePack;
+namespace AisParser.Messages
 {
+    [MessagePackObject]
     public class BinaryAddressedMessage : AisMessage
     {
+        [Key(3)]
         public uint SequenceNumber { get; set; }
+        [Key(4)]
         public uint DestinationMmsi { get; set; }
+        [Key(5)]
         public bool RetransmitFlag { get; set; }
+        [Key(6)]
         public uint Spare { get; set; }
+        [Key(7)]
         public uint DesignatedAreaCode { get; set; }
+        [Key(8)]
         public uint FunctionalId { get; set; }
+        [Key(9)]
         public string Data { get; set; }
 
         public BinaryAddressedMessage()
