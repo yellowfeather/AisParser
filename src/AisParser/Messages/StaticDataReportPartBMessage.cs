@@ -12,6 +12,7 @@
         public uint DimensionToPort { get; set; }
         public uint DimensionToStarboard { get; set; }
         public uint MothershipMmsi { get; set; }
+        public PositionFixType PositionFixType { get; set; }
         public uint Spare { get; set; }
 
         public StaticDataReportPartBMessage()
@@ -35,7 +36,8 @@
             DimensionToStern = payload.ReadUInt(141, 9);
             DimensionToPort = payload.ReadUInt(150, 6);
             DimensionToStarboard = payload.ReadUInt(156, 6);
-            Spare = payload.ReadUInt(162, 6);
+            PositionFixType = payload.ReadEnum<PositionFixType>(162, 4);
+            Spare = payload.ReadUInt(166, 2);
         }
     }
 }
