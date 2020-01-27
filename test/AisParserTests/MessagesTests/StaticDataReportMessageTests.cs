@@ -41,6 +41,7 @@ namespace AisParserTests.MessagesTests
             message.DimensionToStern.ShouldBe(0u);
             message.DimensionToPort.ShouldBe(0u);
             message.DimensionToStarboard.ShouldBe(0u);
+            message.PositionFixType.ShouldBe(PositionFixType.Undefined1);
             message.Spare.ShouldBe(0u);
         }
 
@@ -64,6 +65,7 @@ namespace AisParserTests.MessagesTests
             message.DimensionToStern.ShouldBe(4u);
             message.DimensionToPort.ShouldBe(3u);
             message.DimensionToStarboard.ShouldBe(12u);
+            message.PositionFixType.ShouldBe(PositionFixType.Undefined1);
             message.Spare.ShouldBe(1u);
         }
     }
