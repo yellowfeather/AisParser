@@ -14,7 +14,6 @@
             : base(message)
         {
             ShipName = payload.ReadString(40, 120);
-            Spare = payload.ReadUInt(160, 8);
         }
     }
 }
