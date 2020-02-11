@@ -67,7 +67,7 @@ namespace AisParser
             var bitValue = Substring(startIndex, length);
             var result = Convert.ToInt32(bitValue.Substring(1), 2);
             if (bitValue.StartsWith("1"))
-                result = (int) (result - Math.Pow(2, bitValue.Length));
+                result = (int) (result - Math.Pow(2, bitValue.Length - 1));
 
             return result;
         }
@@ -92,7 +92,7 @@ namespace AisParser
         public int? ReadRateOfTurn(int startIndex, int length)
         {
             var rateOfTurn = ReadInt(startIndex, length);
-            return rateOfTurn == -256 ? null : new int?(rateOfTurn);
+            return rateOfTurn == -128 ? null : new int?(rateOfTurn);
         }
 
         public uint? ReadTrueHeading(int startIndex, int length)
