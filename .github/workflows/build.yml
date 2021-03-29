@@ -52,8 +52,8 @@ jobs:
       - name: Push to NuGet Feed
         env:
           NUGET_URL: https://api.nuget.org/v3/index.json
-          NUGET_API_KEY: ${{ secrets.MYGET_API_KEY }}
-        run: dotnet nuget push ./artifacts/*.nupkg --source $NUGET_FEED --skip-duplicate --api-key $NUGET_KEY
+          NUGET_API_KEY: ${{ secrets.NUGET_API_KEY }}
+        run: dotnet nuget push ./artifacts/*.nupkg --source $NUGET_URL --skip-duplicate --api-key $NUGET_API_KEY
       - name: Artifacts
         uses: actions/upload-artifact@v2
         with:
