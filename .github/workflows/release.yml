@@ -15,19 +15,19 @@ jobs:
       with:
         fetch-depth: 0
     - name: Build and Test
-      run: ./Build.ps1
+      run: ./build.ps1
       shell: pwsh
     - name: Push to MyGet
       env:
         NUGET_URL: https://www.myget.org/F/aisparser/api/v3/index.json
         NUGET_API_KEY: ${{ secrets.MYGET_API_KEY }}
-      run: ./Push.ps1
+      run: ./release.ps1
       shell: pwsh
     - name: Push to NuGet
       env:
         NUGET_URL: https://api.nuget.org/v3/index.json
         NUGET_API_KEY: ${{ secrets.NUGET_API_KEY }}
-      run: ./Push.ps1
+      run: ./release.ps1
       shell: pwsh
     - name: Artifacts
       uses: actions/upload-artifact@v2
