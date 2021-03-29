@@ -3,7 +3,7 @@
 [![Build](https://github.com/yellowfeather/AisParser/actions/workflows/build.yml/badge.svg)](https://github.com/yellowfeather/AisParser/actions/workflows/build.yml)
 [![CodeQL](https://github.com/yellowfeather/AisParser/actions/workflows/codeql-analysis.yml/badge.svg)](https://github.com/yellowfeather/AisParser/actions/workflows/codeql-analysis.yml)
 [![NuGet](http://img.shields.io/nuget/v/AisParser.svg)](https://www.nuget.org/packages/AisParser/)
-[![MyGet](https://img.shields.io/myget/chrisrichards/v/aisparser)](https://www.myget.org/feed/Packages/aisparser)
+[![MyGet](https://img.shields.io/myget/aisparser/v/aisparser)](https://www.myget.org/feed/Packages/aisparser)
 
 C# decoder for Automatic Identification System (AIS) for tracking ships and decoding maritime information
 
