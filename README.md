@@ -1,6 +1,6 @@
 # AisParser
 
-![CI](https://github.com/yellowfeather/AisParser/workflows/CI/badge.svg)
+![Build](https://github.com/yellowfeather/AisParser/actions/workflows/build/badge.svg)
 [![NuGet](http://img.shields.io/nuget/v/AisParser.svg)](https://www.nuget.org/packages/AisParser/)
 [![MyGet](https://www.myget.org/BuildSource/Badge/aisparser)](https://www.myget.org/)
 
