@@ -1,7 +1,9 @@
 # AisParser
 
-[![Build Status](https://dev.azure.com/yellowfeather/AisParser/_apis/build/status/AisParser%20CI?branchName=master)](https://dev.azure.com/yellowfeather/AisParser/_build/latest?definitionId=6&branchName=master)
+![CI](https://github.com/yellowfeather/AisParser/workflows/CI/badge.svg)
 [![NuGet](http://img.shields.io/nuget/v/AisParser.svg)](https://www.nuget.org/packages/AisParser/)
+[![MyGet](https://www.myget.org/BuildSource/Badge/aisparser)](https://www.myget.org/)
+
 
 C# decoder for Automatic Identification System (AIS) for tracking ships and decoding maritime information
 
