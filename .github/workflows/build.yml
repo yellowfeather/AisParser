@@ -1,4 +1,4 @@
-name: .NET Core
+name: Build
 on:
   push:
   pull_request:
@@ -51,7 +51,7 @@ jobs:
         run: dotnet pack -v normal -c Release --include-symbols --include-source -p:PackageVersion=$VERSION -o ./artifacts/*.nupkg
       - name: Push to NuGet Feed
         env:
-          NUGET_URL: https://www.myget.org/F/aisparser/api/v3/index.json
+          NUGET_URL: https://api.nuget.org/v3/index.json
           NUGET_API_KEY: ${{ secrets.MYGET_API_KEY }}
         run: dotnet nuget push ./artifacts/*.nupkg --source $NUGET_FEED --skip-duplicate --api-key $NUGET_KEY
       - name: Artifacts
