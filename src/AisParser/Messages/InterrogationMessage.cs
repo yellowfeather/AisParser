@@ -15,7 +15,7 @@
 
 
         public InterrogationMessage()
-            : base(AisMessageType.AddressedSafetyRelatedMessage)
+            : base(AisMessageType.Interrogation)
         {
         }
         
