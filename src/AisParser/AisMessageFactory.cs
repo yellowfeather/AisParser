@@ -35,7 +35,8 @@ namespace AisParser
                     return new AddressedSafetyRelatedMessage(payload);
                 case AisMessageType.SafetyRelatedAcknowledgement:
                     return new SafetyRelatedAcknowledgementMessage(payload);
-                //case AisMessageType.SafetyRelatedBroadcastMessage:
+                case AisMessageType.SafetyRelatedBroadcastMessage:
+                    return new SafetyRelatedBroadcastMessage(payload);
                 case AisMessageType.Interrogation:
                     return new InterrogationMessage(payload);
                 //case AisMessageType.AssignmentModeCommand:
